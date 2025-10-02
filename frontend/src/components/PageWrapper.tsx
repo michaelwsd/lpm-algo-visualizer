@@ -1,35 +1,17 @@
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
-interface PageWrapperProps {
-  children: React.ReactNode;
-}
-
-export const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
-  const [displayChildren, setDisplayChildren] = useState(children);
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    // Fade out + slide left
-    setIsVisible(false);
-
-    const timeout = setTimeout(() => {
-      // Switch content
-      setDisplayChildren(children);
-      // Fade in + slide right
-      setIsVisible(true);
-    }, 500); // match the duration below
-
-    return () => clearTimeout(timeout);
-  }, [children]);
-
+export const PageWrapper = ({ children }: any) => {
   return (
-    <div
-      className={`
-        transition-all duration-500 ease-in-out
-        ${isVisible ? "opacity-100 translate-x-0 scale-100" : "opacity-0 -translate-x-10 scale-95"}
-      `}
+    <motion.div
+      initial={{ opacity: 0, x: -40, y: 40, scale: 0.95 }}
+      animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+      exit={{ opacity: 0, x: 40, y: -40, scale: 0.95 }}
+      transition={{
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1], // smooth spring-like curve
+      }}
     >
-      {displayChildren}
-    </div>
+      {children}
+    </motion.div>
   );
 };

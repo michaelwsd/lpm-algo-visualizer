@@ -1,10 +1,6 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ZAlgorithm } from "./ZAlgorithm";
-import { BoyerMoore } from "./BoyerMoore";
-import { Home } from "./Home";
-import { PageWrapper } from "./PageWrapper";
-import ErrorComponent from "./Error";
+import { BrowserRouter } from "react-router-dom";
+import { AnimateRoutes } from "./AnimateRoutes";
 
 export const AlgorithmVisualizer: React.FC = () => {
 
@@ -16,27 +12,8 @@ export const AlgorithmVisualizer: React.FC = () => {
                         Linear-time Pattern Matching Algorithms Visualizer
                     </h1>
                 </div>
-                <Routes>
-                    <Route path="/" element={
-                        <PageWrapper>
-                            <Home />
-                        </PageWrapper>
-                        } />
-                    
-                    <Route path="/z-algo" element={
-                        <PageWrapper>
-                            <ZAlgorithm />
-                        </PageWrapper>
-                        } />
-
-                    <Route path="/boyer-moore" element={
-                        <PageWrapper>
-                            <BoyerMoore />
-                        </PageWrapper>
-                        } />
-
-                    <Route path="/*" element={<ErrorComponent />} />
-                </Routes>
+                
+                <AnimateRoutes />
             </BrowserRouter>
         </>
     )
